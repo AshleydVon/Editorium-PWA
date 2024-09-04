@@ -4,7 +4,7 @@ const path = require('path');
 const { InjectManifest } = require('workbox-webpack-plugin');
 
 module.exports = {
-  mode: 'development',
+  mode: 'development', // Change this to 'production' for production builds
   entry: {
     main: './src/js/index.js',
     install: './src/js/install.js'
@@ -12,6 +12,7 @@ module.exports = {
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
+    clean: true, // Clean the output directory before each build
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -23,7 +24,7 @@ module.exports = {
       swDest: 'src-sw.js',
     }),
     new WebpackPwaManifest({
-      fingerprints: false,
+      fingerprints: false, // Ensure this is what you want; set to true for fingerprinting
       inject: true,
       name: 'Just Another Text Editor',
       short_name: 'J.A.T.E',
@@ -34,7 +35,7 @@ module.exports = {
       publicPath: '/',
       icons: [
         {
-          src: path.resolve('src/images/logo.png'),
+          src: path.resolve(__dirname, 'src/images/logo.png'), // Ensure this path is correct
           sizes: [96, 128, 192, 256, 384, 512],
           destination: path.join('assets', 'icons'),
         },
