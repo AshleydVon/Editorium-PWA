@@ -5,10 +5,12 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(express.static(path.join(__dirname, '../client/dist')));
+// Serve static files from the 'dist' directory
+app.use(express.static(path.join(__dirname, 'dist')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// Import routes
 require('./routes/htmlRoutes')(app);
 
 app.listen(PORT, () => console.log(`Now listening on port: ${PORT}`));
